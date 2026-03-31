@@ -12,10 +12,14 @@ function attemptLogin() {
   const pass = document.getElementById('portal-pass').value;
   const err = document.getElementById('portal-error');
 
+  const user = document.getElementById('portal-user').value.trim();
   if (pass === PORTAL_PASSWORD) {
     document.getElementById('portal-gate').style.display = 'none';
     document.getElementById('portal-content').style.display = 'block';
     err.classList.remove('show');
+    if (user) {
+      document.querySelector('.portal-content-header h3').textContent = `Welcome, ${user}.`;
+    }
   } else {
     err.classList.add('show');
   }
@@ -25,6 +29,9 @@ function logout() {
   document.getElementById('portal-gate').style.display = 'grid';
   document.getElementById('portal-content').style.display = 'none';
   document.getElementById('portal-pass').value = '';
+  document.getElementById('portal-user').value = '';
+  document.querySelector('.portal-content-header h3').textContent = 'Welcome, Brother.';
+  document.getElementById('portal-error').classList.remove('show');
 }
 
 // ── Portal Tabs ──────────────────────────────
@@ -43,15 +50,6 @@ function toggleClass(header) {
   const toggle = header.querySelector('.class-toggle');
   const isOpen = members.classList.toggle('open');
   toggle.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-}
-
-// ── Interest Form ────────────────────────────
-
-function handleSubmit() {
-  const btn = document.querySelector('.submit-btn');
-  const confirm = document.getElementById('submit-confirm');
-  btn.style.display = 'none';
-  confirm.style.display = 'block';
 }
 
 // ── Event Listeners ──────────────────────────

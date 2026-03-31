@@ -317,7 +317,7 @@
           <input type="password" id="portal-pass" placeholder="••••••••" />
         </div>
         <div class="error-msg" id="portal-error">Incorrect credentials. Contact your chapter president.</div>
-        <button class="login-btn" onclick="attemptLogin()">Access Portal →</button>
+        <button type="button" class="login-btn" onclick="attemptLogin()">Access Portal →</button>
       </div>
     </div>
 
@@ -460,22 +460,13 @@
       </div>
       <div>
         <div class="interest-form">
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="UTD Email" />
-          <select>
+          <input type="text" id="contact-name" placeholder="Full Name" required />
+          <input type="email" id="contact-email" placeholder="UTD Email" required />
+          <div id="contact-email-error" class="error-msg">Please enter a valid @utdallas.edu email.</div>
+          <select id="contact-major" required>
             <option value="" disabled selected>Your Major</option>
-            <option>Pre-Medicine</option>
-            <option>Business Administration</option>
-            <option>ATEC</option>
-            <option>Computer Science</option>
-            <option>Engineering</option>
-            <option>Neuroscience</option>
-            <option>Biology</option>
-            <option>Finance</option>
-            <option>Psychology</option>
-            <option>Other</option>
           </select>
-          <select>
+          <select id="contact-year" required>
             <option value="" disabled selected>Class Year</option>
             <option>Freshman</option>
             <option>Sophomore</option>
@@ -483,8 +474,9 @@
             <option>Senior</option>
             <option>Graduate Student</option>
           </select>
-          <textarea placeholder="Why do you want to join PGN UTD? (optional)"></textarea>
-          <button class="submit-btn" onclick="handleSubmit()">Submit Interest →</button>
+          <textarea id="contact-reason" placeholder="Why do you want to join PGN UTD? (optional)"></textarea>
+          <div id="contact-form-error" class="error-msg">Please complete all required fields and use a valid @utdallas.edu email.</div>
+          <button type="button" class="submit-btn" onclick="handleSubmit()">Submit Interest →</button>
           <div id="submit-confirm" class="submit-confirm">Thank you — we'll be in touch, brother.</div>
         </div>
       </div>
@@ -503,5 +495,6 @@
 </footer>
 
 <script src="js/main.js"></script>
-</body>
+    <script src="js/contact.js"></script>
+  </body>
 </html>
