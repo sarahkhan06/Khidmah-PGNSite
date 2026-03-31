@@ -1,4 +1,4 @@
-# PGN
+# Khidmah-PGNSite
 
-Initial repository setup.
+PGN Khidmah site repository.
 
