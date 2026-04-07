@@ -411,97 +411,53 @@
             <button class="doc-btn">View</button>
           </div>
           <div class="doc-row">
-            <span class="doc-icon">📅</span>
-            <div>
-              <div class="doc-title">Chapter Calendar 2025</div>
-              <div class="doc-meta">Spring semester schedule</div>
-            </div>
-            <button class="doc-btn">View</button>
-          </div>
-          <div class="doc-row">
-            <span class="doc-icon">📋</span>
-            <div>
-              <div class="doc-title">New Member Handbook</div>
-              <div class="doc-meta">For all pledges & new brothers</div>
-            </div>
-            <button class="doc-btn">View</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="inner">
-    <div class="section-label">Get Involved</div>
-    <h2 class="section-title">Join the<br>Brotherhood.</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p>Rush season happens every semester. If you're ready to grow professionally, build genuine relationships, and be part of something different — reach out. We want to hear from you.</p>
-        <p>We welcome students from all majors, backgrounds, and class years. The only requirement: ambition and integrity.</p>
-        <div class="contact-links">
-          <a href="mailto:pgn.utd@utdallas.edu" class="contact-link">
-            <div class="contact-link-icon">✉</div>
-            pgn.utd@utdallas.edu
-          </a>
-          <a href="#" class="contact-link">
-            <div class="contact-link-icon">📸</div>
-            @pgn_utd
-          </a>
-          <a href="#" class="contact-link">
-            <div class="contact-link-icon">🔗</div>
-            pgnleaders.org/ut-dallas
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="interest-form">
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="UTD Email" />
-          <select>
-            <option value="" disabled selected>Your Major</option>
-            <option>Pre-Medicine</option>
-            <option>Business Administration</option>
-            <option>ATEC</option>
-            <option>Computer Science</option>
-            <option>Engineering</option>
-            <option>Neuroscience</option>
-            <option>Biology</option>
-            <option>Finance</option>
-            <option>Psychology</option>
-            <option>Other</option>
-          </select>
-          <select>
-            <option value="" disabled selected>Class Year</option>
-            <option>Freshman</option>
-            <option>Sophomore</option>
-            <option>Junior</option>
-            <option>Senior</option>
-            <option>Graduate Student</option>
-          </select>
-          <textarea placeholder="Why do you want to join PGN UTD? (optional)"></textarea>
-          <button class="submit-btn" onclick="handleSubmit()">Submit Interest →</button>
-          <div id="submit-confirm" class="submit-confirm">Thank you — we'll be in touch, brother.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">PGN <span>UTD</span></div>
-  <div class="footer-note">
-    © 2025 PGN UTD Chapter · UT Dallas ·<br>
-    Not affiliated with any fraternal organization at UTD.
-  </div>
-  <a href="https://www.pgnleaders.org" class="footer-pgn-link">pgnleaders.org ↗</a>
-</footer>
-
-<script src="js/main.js"></script>
-</body>
-</html>
+            <script type="module">
+              // 1. Correct URL-based imports for HTML files
+              import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+              import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+            
+              // 2. Your specific Firebase configuration
+              const firebaseConfig = {
+                apiKey: "AIzaSyB4MaSbpYbFVcnLjhGAg4T0y3UYMktwUUE",
+                authDomain: "pgn-utd-portal.firebaseapp.com",
+                projectId: "pgn-utd-portal",
+                storageBucket: "pgn-utd-portal.firebasestorage.app",
+                messagingSenderId: "770209804962",
+                appId: "1:770209804962:web:eaa0e54fc2e26c88589dfb",
+                measurementId: "G-3BT7LNXGEQ"
+              };
+            
+              // 3. Initialize Firebase and Auth
+              const app = initializeApp(firebaseConfig);
+              const auth = getAuth(app);
+            
+              // 4. The Login Function
+              window.attemptLogin = async () => {
+                const email = document.getElementById('portal-user').value; 
+                const pass = document.getElementById('portal-pass').value;
+                const err = document.getElementById('portal-error');
+            
+                // Basic check to make sure they typed something
+                if (!email || !pass) {
+                  err.textContent = "Please enter both email and password.";
+                  err.classList.add('show');
+                  return;
+                }
+            
+                try {
+                  // Firebase checks the credentials against your dashboard
+                  await signInWithEmailAndPassword(auth, email, pass);
+                  
+                  // Success: Reveal the portal
+                  document.getElementById('portal-gate').style.display = 'none';
+                  document.getElementById('portal-content').style.display = 'block';
+                  err.classList.remove('show');
+                  console.log("Login successful!");
+                } catch (error) {
+                  // Failure: Show error message
+                  console.error("Login Error:", error.code);
+                  err.textContent = "Incorrect credentials. Contact your chapter president.";
+                  err.classList.add('show');
+                }
+              };
+            </script>
