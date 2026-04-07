@@ -4,22 +4,36 @@
 
 // Portal credentials
 // Change these to whatever you want
-const PORTAL_PASSWORD = "pgnutd2025";
+
 
 // ── Portal Login ─────────────────────────────
-
-function attemptLogin() {
+async function attemptLogin() {
   const pass = document.getElementById('portal-pass').value;
   const err = document.getElementById('portal-error');
 
-  if (pass === PORTAL_PASSWORD) {
-    document.getElementById('portal-gate').style.display = 'none';
-    document.getElementById('portal-content').style.display = 'block';
-    err.classList.remove('show');
-  } else {
-    err.classList.add('show');
+  try {
+      // Send the password to our actual backend server
+      const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pass })
+      });
+
+      // The server will send back a status. 200 means success!
+      if (response.status === 200) {
+          document.getElementById('portal-gate').style.display = 'none';
+          document.getElementById('portal-content').style.display = 'block';
+          err.classList.remove('show');
+      } else {
+          // Password was wrong
+          err.classList.add('show');
+      }
+  } catch (error) {
+      console.error("Make sure your backend server is running!", error);
+      alert("Could not connect to the server.");
   }
 }
+
 
 function logout() {
   document.getElementById('portal-gate').style.display = 'grid';
