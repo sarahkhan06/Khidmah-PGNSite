@@ -54,9 +54,24 @@ function handleSubmit() {
   confirm.style.display = 'block';
 }
 
+function loadEventsSection() {
+  const placeholder = document.getElementById('events-placeholder');
+  if (!placeholder) return;
+
+  fetch('events.html')
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.text();
+    })
+    .then(html => { placeholder.innerHTML = html; })
+    .catch(error => { console.error('Could not load events section:', error); });
+}
+
 // ── Event Listeners ──────────────────────────
 
 document.addEventListener('DOMContentLoaded', function () {
+  loadEventsSection();
+
   // Allow pressing Enter in the portal password field
   const passField = document.getElementById('portal-pass');
   if (passField) {
