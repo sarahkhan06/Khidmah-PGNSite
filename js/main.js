@@ -39,6 +39,14 @@ function handleSubmit() {
   confirm.style.display = 'block';
 }
 
+function handleContactSubmit() {
+  const btn = document.getElementById('contact-send-btn');
+  const confirm = document.getElementById('contact-submit-confirm');
+  if (!btn || !confirm) return;
+  btn.style.display = 'none';
+  confirm.style.display = 'block';
+}
+
 // ── Event Listeners ──────────────────────────
 
 document.addEventListener('DOMContentLoaded', function () {
