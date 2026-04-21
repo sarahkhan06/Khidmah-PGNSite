@@ -45,6 +45,14 @@ function toggleClass(header) {
   toggle.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
 }
 
+function toggleChapterDropdown(btn) {
+  const body = btn.nextElementSibling;
+  const toggle = btn.querySelector('.chapter-dropdown-toggle');
+  const isOpen = body.classList.toggle('open');
+  if (toggle) toggle.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
 // ── Interest Form ────────────────────────────
 
 function handleSubmit() {
