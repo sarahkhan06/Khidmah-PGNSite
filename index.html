@@ -158,7 +158,7 @@
         <h3>Exclusive Access<br>for Brothers</h3>
         <p>The PGN UTD Brothers Portal is a private space for current and alumni members. Access the member directory, chapter photos, important documents, and more.</p>
         <ul class="portal-perks">
-          <li>Full member directory with emails</li>
+          <li>Full member directory</li>
           <li>Chapter photo archives</li>
           <li>Meeting notes & resources</li>
           <li>Internal announcements</li>
@@ -201,28 +201,59 @@
       </div>
 
       <div id="tab-photos" class="portal-tab-content">
-        <div class="photo-grid">
-          <div class="photo-placeholder"><div class="photo-icon">📸</div><div>Founding Night</div></div>
-          <div class="photo-placeholder"><div class="photo-icon">📸</div><div>Big/Little Reveal</div></div>
-          <div class="photo-placeholder"><div class="photo-icon">📸</div><div>Service Day</div></div>
-          <div class="photo-placeholder"><div class="photo-icon">📸</div><div>Chapter Formal</div></div>
+        
+        <h4 style="margin-top: 0; margin-bottom: 10px;">Big Little Photos</h4>
+        <iframe 
+          src="https://drive.google.com/embeddedfolderview?id=1SXuIsqk8LYlLmCPspnfKwzLvvCsegu9M#grid" 
+          width="100%" 
+          height="400" 
+          frameborder="0"
+          style="border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
+        </iframe>
+
+        <h4 style="margin-top: 0; margin-bottom: 10px;">More Big Little Photos</h4>
+        <iframe 
+          src="https://drive.google.com/embeddedfolderview?id=1MgrnxkqXL9UNCgzJBjrlDdnlQq5RgnRe#grid" 
+          width="100%" 
+          height="400" 
+          frameborder="0"
+          style="border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
+        </iframe>
+
+        <h4 style="margin-top: 0; margin-bottom: 10px;">Chapter Highlights</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+          
+          <div style="background: #111; padding: 10px; border-radius: 8px; border: 1px solid #333;">
+            <img src="https://photos.google.com/share/AF1QipNpKThVG-e1iGBhVZb7s_mB405rthq0Sw0kmEHQkcDRYjBAWGiYx9MgVy2BS5fgTA?pli=1&key=TGVpcXk2Ym9xWUwwVFZlUHk5ZC1KSHBBUDJfQ0NR" alt="PGN Pics Fall 25'" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;" />
+            <div style="text-align: center; font-size: 0.9rem; margin-top: 10px; font-weight: 500;">PGN Pics Fall 25'</div>
+          </div>
+
+          <div style="background: #111; padding: 10px; border-radius: 8px; border: 1px solid #333;">
+            <img src="https://photos.google.com/share/AF1QipMwEonTT6UrLH4WO75qeNZSK5DN3ApRmR38oFbXaRv6-wDujMZYQbluSXIGper5Jw?key=di1GY3RjbVhQXzd2NnhCU3BvWnRWSmFBQmhpWmtR" alt="PGN Pics Spring 25'" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;" />
+            <div style="text-align: center; font-size: 0.9rem; margin-top: 10px; font-weight: 500;">PGN Pics Spring 25'</div>
+          </div>
+
+          <div style="background: #111; padding: 10px; border-radius: 8px; border: 1px solid #333;">
+            <img src="https://photos.google.com/share/AF1QipOkhHuKIdcHkzUFNOLx1VBrv_umekPtxD6kw9de-e0axTqW4lFtAQaLKMks_YNF1g?key=S1Z3RzZpTGNYSGxKMGVlbEQ4dDc4anJ5Q2x3RmVB" alt="March Madness Photos" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;" />
+            <div style="text-align: center; font-size: 0.9rem; margin-top: 10px; font-weight: 500;">March Madness Photos</div>
+          </div>
+
         </div>
+
+        <p class="portal-note">* Photos are pulled directly from the chapter Google Drive and Google Photos.</p>
       </div>
 
       <div id="tab-docs" class="portal-tab-content">
-        <div class="docs-list">
-          <div class="doc-row">
-            <span class="doc-icon">📄</span>
-            <div><div class="doc-title">Chapter Constitution</div><div class="doc-meta">Last updated: Fall 2024</div></div>
-            <button class="doc-btn">View</button>
-          </div>
-          <div class="doc-row">
-            <span class="doc-icon">📄</span>
-            <div><div class="doc-title">New Member Handbook</div><div class="doc-meta">Last updated: Spring 2025</div></div>
-            <button class="doc-btn">View</button>
-          </div>
-        </div>
+        <iframe 
+          src="https://drive.google.com/embeddedfolderview?id=PASTE_DOCS_FOLDER_ID_HERE#list" 
+          width="100%" 
+          height="500" 
+          frameborder="0"
+          style="border-radius: 8px; border: 1px solid #333;">
+        </iframe>
+        <p class="portal-note">* Documents are pulled directly from the chapter Google Drive.</p>
       </div>
+
     </div>
   </div>
 </section>
@@ -248,17 +279,17 @@
 
   // --- SINGLE PASSWORD LOGIN ---
   window.attemptLogin = async () => {
-    const passInput = document.getElementById('portal-pass').value;
+    // .trim() removes invisible spaces from user's input
+    const passInput = document.getElementById('portal-pass').value.trim();
     const err = document.getElementById('portal-error');
 
     if (!passInput) return;
 
     try {
-      // Look inside the "settings" collection for the "portal" document
       const settingsDoc = await getDoc(doc(db, "settings", "portal"));
       
-      // Check if what the user typed matches the database
-      if (settingsDoc.exists() && settingsDoc.data().masterPassword === passInput) {
+      // .trim() removes invisible spaces from the database just in case!
+      if (settingsDoc.exists() && settingsDoc.data().masterPassword.trim() === passInput) {
         document.getElementById('portal-gate').style.display = 'none';
         document.getElementById('portal-content').style.display = 'block';
         err.classList.remove('show');
