@@ -60,18 +60,24 @@ nav {
 }
 
 .nav-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   min-width: 0;
   text-decoration: none;
   color: var(--white);
+  /* Unifies wide logos that ship with a black plate so they don’t “float” on the light bar */
+  background: #0c0c0c;
+  border-radius: 12px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
 .nav-logo-img {
-  height: clamp(46px, 5.5vw, 68px);
+  height: clamp(36px, 4.6vw, 54px);
   width: auto;
-  max-width: min(360px, 48vw);
+  max-width: min(300px, 52vw);
   object-fit: contain;
   display: block;
 }
@@ -80,7 +86,7 @@ nav {
   font-family: var(--font-display);
   font-size: clamp(1.45rem, 3.2vw, 1.9rem);
   letter-spacing: 0.06em;
-  color: var(--gold);
+  color: var(--gold-light);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -1265,9 +1271,13 @@ footer {
 @media (max-width: 700px) {
   nav { padding: 0 1rem; }
   .nav-links { display: none; }
+  .nav-logo {
+    padding: 5px 10px 5px 8px;
+    border-radius: 10px;
+  }
   .nav-logo-img {
     max-width: 68vw;
-    height: clamp(40px, 11vw, 52px);
+    height: clamp(34px, 10vw, 46px);
   }
   .nav-logo-suffix { display: none; }
   section { padding: 3.5rem 1.2rem; }
