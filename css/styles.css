@@ -1106,19 +1106,6 @@ section { padding: 5rem 2.5rem; }
   color: var(--gold);
 }
 
-.ig-marquee-banner__badge {
-  font-family: var(--font-condensed);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--white-muted);
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid rgba(28, 27, 25, 0.1);
-  background: rgba(255, 255, 255, 0.55);
-}
-
 .ig-marquee-banner__cta {
   font-family: var(--font-condensed);
   font-size: 0.75rem;
@@ -1135,12 +1122,6 @@ section { padding: 5rem 2.5rem; }
 }
 
 .ig-marquee-banner__cta:hover { background: rgba(255, 255, 255, 0.95); transform: translateY(-1px); }
-
-.ig-marquee-banner__note {
-  color: var(--white-muted);
-  font-size: 0.85rem;
-  margin: 0.5rem auto 1.25rem;
-}
 
 .ig-marquee-banner__viewport {
   overflow: hidden;
