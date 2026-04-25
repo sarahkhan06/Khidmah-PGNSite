@@ -20,11 +20,19 @@
     padding-bottom: 5px;
     letter-spacing: 1px;
   }
-  /* Google Photos Button Hover Effect */
+  /* Google Photos & Drive Heading Button Hover Effect */
   .photo-link-btn:hover {
     background: #1a1a1a !important;
     border-color: #d4af37 !important;
     cursor: pointer;
+  }
+  .drive-heading-link {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .drive-heading-link:hover {
+    color: #d4af37;
   }
 </style>
 </head>
@@ -286,7 +294,9 @@
       </div>
 
       <div id="tab-photos" class="portal-tab-content">
-        <h4 style="margin-top: 0; margin-bottom: 10px;">Big Little Photos</h4>
+        <h4 style="margin-top: 0; margin-bottom: 10px;">
+          <a href="https://drive.google.com/drive/folders/1SXuIsqk8LYlLmCPspnfKwzLvvCsegu9M" target="_blank" class="drive-heading-link">Big Little Photos <span style="font-size: 0.8em; color: #d4af37;">↗</span></a>
+        </h4>
         <iframe 
           src="https://drive.google.com/embeddedfolderview?id=1SXuIsqk8LYlLmCPspnfKwzLvvCsegu9M#grid" 
           width="100%" 
@@ -295,7 +305,9 @@
           style="border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
         </iframe>
 
-        <h4 style="margin-top: 0; margin-bottom: 10px;">More Big Little Photos</h4>
+        <h4 style="margin-top: 0; margin-bottom: 10px;">
+          <a href="https://drive.google.com/drive/folders/1MgrnxkqXL9UNCgzJBjrlDdnlQq5RgnRe" target="_blank" class="drive-heading-link">More Big Little Photos <span style="font-size: 0.8em; color: #d4af37;">↗</span></a>
+        </h4>
         <iframe 
           src="https://drive.google.com/embeddedfolderview?id=1MgrnxkqXL9UNCgzJBjrlDdnlQq5RgnRe#grid" 
           width="100%" 
