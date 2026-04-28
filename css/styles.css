@@ -116,6 +116,13 @@ nav {
 
 .nav-links a:hover { color: var(--gold); }
 
+.nav-logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-active { color: var(--gold) !important; }
+
 .nav-cta {
   background: var(--red);
   color: var(--on-red) !important;
@@ -615,6 +622,11 @@ section { padding: 5rem 2.5rem; }
 
 .class-members.open { max-height: 500px; }
 
+#lineage .class-members.open,
+.lineage-tree--nested .class-members.open {
+  max-height: min(2000px, 85vh);
+}
+
 .member-chip {
   background: var(--black);
   border: 1px solid rgba(28, 27, 25, 0.1);
@@ -647,6 +659,284 @@ section { padding: 5rem 2.5rem; }
   width: 2px;
   background: linear-gradient(180deg, var(--red) 0%, rgba(204,0,0,0.1) 100%);
   pointer-events: none;
+}
+
+/* ============================================
+   ABOUT PAGE (chapter dropdowns)
+   ============================================ */
+
+#about-page {
+  background: var(--black-soft);
+  padding-top: 7rem;
+  min-height: 70vh;
+}
+
+.about-page-title { margin-bottom: 1rem; }
+
+.about-page-lead {
+  color: var(--white-muted);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.chapter-dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.chapter-dropdown {
+  background: var(--black);
+  border: 1px solid rgba(255,184,0,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.chapter-dropdown-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-condensed);
+  font-size: inherit;
+  color: inherit;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.chapter-dropdown-header:hover {
+  background: rgba(255,184,0,0.06);
+}
+
+.chapter-dropdown-icon {
+  color: var(--red);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.chapter-dropdown-label {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.chapter-dropdown-toggle {
+  font-size: 0.85rem;
+  color: var(--white-muted);
+  transition: transform 0.3s;
+}
+
+.chapter-dropdown-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.chapter-dropdown-body.open {
+  max-height: 4000px;
+}
+
+.chapter-dropdown-body .chapter-dropdown-intro {
+  padding: 1.25rem 1.25rem 0;
+  margin-bottom: 1rem;
+  color: var(--white-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.chapter-dropdown-body > .lineage-tree--nested,
+.chapter-dropdown-body > .exec-grid,
+.chapter-dropdown-body > .current-members-grid {
+  padding: 0 1.25rem 1.5rem;
+}
+
+.lineage-tree--nested {
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.lineage-tree--nested .lineage-connector {
+  left: 28px;
+}
+
+.lineage-tree--nested .class-block:last-child {
+  margin-bottom: 0;
+}
+
+.exec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.exec-card {
+  background: var(--black-mid);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid var(--gold);
+  padding: 1rem 1.1rem;
+  border-radius: 2px;
+}
+
+.exec-role {
+  font-family: var(--font-condensed);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+
+.exec-name {
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.exec-major {
+  font-size: 0.78rem;
+  color: var(--white-muted);
+  margin-top: 0.25rem;
+}
+
+#exec-board-page {
+  background: var(--black-mid);
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+  min-height: 70vh;
+}
+
+.exec-board-title {
+  margin-bottom: 1rem;
+}
+
+.exec-page-lead {
+  color: var(--white-muted);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.exec-spotlight {
+  background: var(--black);
+  border: 1px solid rgba(204,0,0,0.35);
+  border-top: 4px solid var(--red);
+  border-radius: 2px;
+  padding: 2rem 2.25rem;
+  margin-bottom: 3rem;
+}
+
+.exec-spotlight-inner {
+  max-width: 560px;
+}
+
+.exec-spotlight-label {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.exec-spotlight-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+
+.exec-spotlight-meta {
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+.exec-spotlight-bio {
+  font-size: 0.88rem;
+  color: var(--white-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.exec-board-subhead {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+.exec-grid--page {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.exec-grid--page .exec-card {
+  border-top-color: var(--red);
+}
+
+.inline-chapter-link {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inline-chapter-link:hover {
+  color: var(--white);
+}
+
+.about-page-back-sep {
+  margin: 0 0.5rem;
+  color: var(--white-muted);
+}
+
+.current-members-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 0.25rem;
+}
+
+.about-page-back {
+  margin-top: 2rem;
+}
+
+.about-page-back a {
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.about-page-back a:hover {
+  color: var(--white);
 }
 
 /* ============================================
