@@ -1,0 +1,60 @@
+#events {
+  background: var(--black);
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  background: var(--black-soft);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.event-card:hover { border-color: rgba(204,0,0,0.4); }
+
+.event-tag-bar {
+  height: 4px;
+  background: var(--red);
+}
+
+.event-tag-bar.gold { background: var(--gold); }
+
+.event-body { padding: 1.5rem; }
+
+.event-type {
+  font-family: var(--font-condensed);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.event-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+
+.event-title {
+  font-family: var(--font-condensed);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.event-desc {
+  font-size: 0.82rem;
+  color: var(--white-muted);
+  line-height: 1.6;
+}
