@@ -36,11 +36,10 @@ function handleContactSubmit() {
 
 // ── Event Listeners ──────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-  // Allow pressing Enter in the portal password field
   const passField = document.getElementById('portal-pass');
   if (passField) {
     passField.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') window.attemptLogin();
+      if (e.key === 'Enter' && typeof window.attemptLogin === 'function') window.attemptLogin();
     });
   }
 });
