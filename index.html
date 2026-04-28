@@ -7,11 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="page-home">
 
 <nav>
   <a href="index.html" class="nav-logo" aria-label="Phi Gamma Nu — UTD Chapter home">
-    <img src="assets/images/pgn-logo-wide.png" alt="Phi Gamma Nu" class="nav-logo-img" width="280" height="72" />
+    <span class="nav-logo-mark">
+      <img src="assets/images/pgn-logo-wide.png" alt="Phi Gamma Nu" class="nav-logo-img" width="400" height="100" decoding="async" />
+    </span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -24,8 +26,12 @@
 </nav>
 
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-photo" role="img" aria-label="Phi Gamma Nu UTD chapter members"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-grid-lines"></div>
+  <div class="hero-rose" aria-hidden="true">
+    <div class="hero-rose__mount" id="rose3d"></div>
+  </div>
   <div class="hero-content">
     <div class="hero-eyebrow">Professional Co-Ed Organization — UT Dallas</div>
     <h1 class="hero-title">
@@ -55,7 +61,7 @@
 
 <div class="section-divider"></div>
 
-<section id="about">
+<section id="about" class="rose-slot-left">
   <div class="inner">
     <div class="section-label">About PGN</div>
     <h2 class="section-title">Not a Fraternity.<br>Something More.</h2>
@@ -77,7 +83,7 @@
 
 <div class="section-divider"></div>
 
-<section id="diversity">
+<section id="diversity" class="rose-slot-right">
   <div class="inner">
     <div class="section-label">Who We Are</div>
     <h2 class="section-title">Every Major.<br>One Brotherhood.</h2>
@@ -100,7 +106,7 @@
 
 <div class="section-divider"></div>
 
-<section id="lineage">
+<section id="lineage" class="rose-slot-left">
   <div class="inner">
     <div class="section-label">Our Brotherhood Lineage</div>
     <h2 class="section-title">From the First to<br>the Latest.</h2>
@@ -129,7 +135,7 @@
 
 <div class="section-divider"></div>
 
-<section id="events">
+<section id="events" class="rose-slot-right">
   <div class="inner">
     <div class="section-label">Life in PGN</div>
     <h2 class="section-title">Events &<br>Programming</h2>
@@ -146,7 +152,7 @@
 
 <div class="section-divider"></div>
 
-<section id="portal">
+<section id="portal" class="rose-slot-left">
   <div class="inner">
     <div class="section-label">Members Only</div>
     <h2 class="section-title">Brothers<br>Portal</h2>
@@ -226,6 +232,7 @@
 </section>
 
 <script src="js/main.js"></script>
+<script type="module" src="js/rose-dark-glass.js"></script>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
