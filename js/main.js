@@ -18,6 +18,14 @@ function toggleClass(header) {
   toggle.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
 }
 
+function toggleChapterDropdown(btn) {
+  const body = btn.nextElementSibling;
+  const toggle = btn.querySelector('.chapter-dropdown-toggle');
+  const isOpen = body.classList.toggle('open');
+  if (toggle) toggle.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
 // ── Interest Form ────────────────────────────
 function handleSubmit() {
   const btn = document.querySelector('.submit-btn');
@@ -26,13 +34,20 @@ function handleSubmit() {
   confirm.style.display = 'block';
 }
 
+function handleContactSubmit() {
+  const btn = document.getElementById('contact-send-btn');
+  const confirm = document.getElementById('contact-submit-confirm');
+  if (!btn || !confirm) return;
+  btn.style.display = 'none';
+  confirm.style.display = 'block';
+}
+
 // ── Event Listeners ──────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-  // Allow pressing Enter in the portal password field
   const passField = document.getElementById('portal-pass');
   if (passField) {
     passField.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') window.attemptLogin();
+      if (e.key === 'Enter' && typeof window.attemptLogin === 'function') window.attemptLogin();
     });
   }
 });
