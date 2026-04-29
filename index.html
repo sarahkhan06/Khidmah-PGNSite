@@ -51,7 +51,7 @@
     <li><a href="#diversity">Who We Are</a></li>
     <li><a href="#lineage">Lineage</a></li>
     <li><a href="#events">Events</a></li>
-    <li><a href="portal.html">Member Portal</a></li>
+    <li><a href="portal.html">Brothers Portal</a></li>
     <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
   </ul>
 </nav>
@@ -139,6 +139,78 @@
           <div class="pillar-desc">Service projects, fundraising, and outreach — brothers invest in our campus and the wider community.</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="pillars-values" class="rose-slot-right">
+  <div class="inner">
+    <div class="section-label">Our Foundation</div>
+    <h2 class="section-title">Three Pillars.<br>Three Values.</h2>
+
+    <div class="pv-grid">
+      <div class="pv-block">
+        <h3 class="pv-heading">Three Pillars</h3>
+        <div class="pv-cards">
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">📈</div>
+              <div class="pv-title">Professional</div>
+            </div>
+            <div class="pv-desc">Career development, networking, and growth that turns ambition into results.</div>
+          </div>
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">🤝</div>
+              <div class="pv-title">Social</div>
+            </div>
+            <div class="pv-desc">A brotherhood built on consistency, accountability, and real friendships.</div>
+          </div>
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">🤲</div>
+              <div class="pv-title">Philanthropy</div>
+            </div>
+            <div class="pv-desc">Serving our campus and community through outreach, service, and giving back.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-block">
+        <h3 class="pv-heading">Three Values</h3>
+        <div class="pv-cards">
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">🌍</div>
+              <div class="pv-title">Diversity</div>
+            </div>
+            <div class="pv-desc">Every major. Every background. One brotherhood — stronger together.</div>
+          </div>
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">🧭</div>
+              <div class="pv-title">Integrity</div>
+            </div>
+            <div class="pv-desc">We do the right thing — for each other, our campus, and our future.</div>
+          </div>
+          <div class="pv-card">
+            <div class="pv-card-top">
+              <div class="pv-icon">💡</div>
+              <div class="pv-title">Entrepreneurial Spirit</div>
+            </div>
+            <div class="pv-desc">We build, create, and lead — always looking for the next way to improve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-vision">
+      <div class="pv-vision-label">Our Vision</div>
+      <p class="pv-vision-text">
+        To create well-rounded leaders of tomorrow who enrich the lives of others, their industries, and their communities.
+      </p>
     </div>
   </div>
 </section>
@@ -304,12 +376,11 @@
 </section>
 <div class="section-divider"></div>
 
-<section id="portal" class="rose-slot-left">
+<section id="portal-cta" class="rose-slot-left">
   <div class="inner">
     <div class="section-label">Members Only</div>
     <h2 class="section-title">Brothers<br>Portal</h2>
-
-    <div id="portal-gate" class="portal-gate">
+    <div class="portal-gate">
       <div class="portal-info">
         <h3>Exclusive Access<br>for Brothers</h3>
         <p>The PGN UTD Brothers Portal is a private space for members. Access the member directory, chapter photos, and resources.</p>
@@ -318,209 +389,13 @@
           <li>Chapter photo archives</li>
           <li>Internal announcements</li>
         </ul>
-      </div>
-      
-      <div class="portal-login-box">
-        <div id="login-fields">
-          <h4>Member Login</h4>
-          <p>Enter the current chapter password.</p>
-          <div class="form-group">
-            <label>Chapter Password</label>
-            <input type="password" id="portal-pass" placeholder="••••••••" />
-          </div>
-          <div class="error-msg" id="portal-error">Incorrect chapter password.</div>
-          <button class="login-btn" onclick="attemptLogin()">Access Portal →</button>
-        </div>
+        <a class="login-btn" href="portal.html">Go to Portal →</a>
       </div>
     </div>
-
-    <div id="portal-content" style="display: none;">
-      <div class="portal-content-header">
-        <h3>Welcome, Brother.</h3>
-        <button class="logout-btn" onclick="logout()">Log Out</button>
-      </div>
-      
-      <div class="portal-tabs">
-        <button class="portal-tab active" onclick="switchTab(this, 'tab-directory')">Directory</button>
-        <button class="portal-tab" onclick="switchTab(this, 'tab-photos')">Photos</button>
-      </div>
-
-      <div id="tab-directory" class="portal-tab-content active">
-        
-        <div class="directory-section">
-          <h3 class="class-title">Alpha Class</h3>
-          <div class="member-directory">
-            <div class="dir-card"><div class="dir-avatar">AV</div><div><div class="dir-name">Aaron Varghese</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AJ</div><div><div class="dir-name">Akshar Jothi</div><div class="dir-email">aksharjothi@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AA</div><div><div class="dir-name">Albert Alexis</div><div class="dir-email">albertalexis28@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AL</div><div><div class="dir-name">Aman Lund</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AG</div><div><div class="dir-name">Aneela George</div><div class="dir-email">aneelaggeorge24@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AB</div><div><div class="dir-name">Anish Beeram</div><div class="dir-email">anishbeeram@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AM</div><div><div class="dir-name">Ankiita Murali</div><div class="dir-email">ankiita.murali@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">DA</div><div><div class="dir-name">Danya Abdelhadi</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">EM</div><div><div class="dir-name">Ephraim Mathews</div><div class="dir-email">ephraimmathews2@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">GS</div><div><div class="dir-name">Gayathiri Sureshkumar</div><div class="dir-email">gayathiris812@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">KS</div><div><div class="dir-name">Kavya Srinivas</div><div class="dir-email">Kavyautd@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">LS</div><div><div class="dir-name">Lucky Soma</div><div class="dir-email">lakshitasoma@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">MK</div><div><div class="dir-name">Mihira Kada</div><div class="dir-email">mihirakada@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">NJ</div><div><div class="dir-name">Noyal John</div><div class="dir-email">noyaljohn1624@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">OM</div><div><div class="dir-name">Om More</div><div class="dir-email">om.more.2005@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">PA</div><div><div class="dir-name">Pranav Athreya</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">RJ</div><div><div class="dir-name">Riddhi Jain</div><div class="dir-email">riddhi.j.jain@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">RN</div><div><div class="dir-name">Rupali Nagendra</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SL</div><div><div class="dir-name">Sahil Lalani</div><div class="dir-email">sahil.lalaniali@gmail.com</div><div class="dir-major-tag">Alpha</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">VJ</div><div><div class="dir-name">Vignes Jeevanandam</div><div class="dir-email">No Email</div><div class="dir-major-tag">Alpha</div></div></div>
-          </div>
-        </div>
-
-        <div class="directory-section">
-          <h3 class="class-title">Beta Class</h3>
-          <div class="member-directory">
-            <div class="dir-card"><div class="dir-avatar">AN</div><div><div class="dir-name">Aditri Nasani</div><div class="dir-email">aditri.nasani@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AK</div><div><div class="dir-name">Akhil Koladi</div><div class="dir-email">Akhil.varun9@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AB</div><div><div class="dir-name">Anoushka Bobba</div><div class="dir-email">anoushkabobba@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AD</div><div><div class="dir-name">Ari Dashora</div><div class="dir-email">dashora.aryaman@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">BT</div><div><div class="dir-name">Brahmani Tirumalaraju</div><div class="dir-email">No Email</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">DA</div><div><div class="dir-name">Daniel Abraham</div><div class="dir-email">danbrahm7279@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">JB</div><div><div class="dir-name">Johanna Biju</div><div class="dir-email">johannabiju@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">MG</div><div><div class="dir-name">Madhu Govind</div><div class="dir-email">Madhugovind2006@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">MP</div><div><div class="dir-name">Mira Prabakar</div><div class="dir-email">mridhulaprabakar@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">NY</div><div><div class="dir-name">Nathan Yee</div><div class="dir-email">No Email</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">RM</div><div><div class="dir-name">Renee Menezes</div><div class="dir-email">renee.menezes@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">RP</div><div><div class="dir-name">Riya Patel</div><div class="dir-email">patelr2106@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SP</div><div><div class="dir-name">Sid Phadke</div><div class="dir-email">No Email</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SS</div><div><div class="dir-name">Sree Shankar</div><div class="dir-email">sreeshankar717@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">TJ</div><div><div class="dir-name">Theresa Jagan</div><div class="dir-email">theresajagan1@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">VP</div><div><div class="dir-name">Vaibhav Pathy</div><div class="dir-email">vibesrx6@gmail.com</div><div class="dir-major-tag">Beta</div></div></div>
-          </div>
-        </div>
-
-        <div class="directory-section">
-          <h3 class="class-title">Gamma Class</h3>
-          <div class="member-directory">
-            <div class="dir-card"><div class="dir-avatar">AA</div><div><div class="dir-name">Anirudh Arjunan</div><div class="dir-email">Anirudh.Arjunan@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">AS</div><div><div class="dir-name">Ayush Sikdar</div><div class="dir-email">sikdarayush01@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">CV</div><div><div class="dir-name">Chaitrika Voruganti</div><div class="dir-email">chaitrikavoruganti@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">EC</div><div><div class="dir-name">Ethan Chen</div><div class="dir-email">ethannichen@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">HR</div><div><div class="dir-name">Harris Rahman</div><div class="dir-email">harrisrahman333@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">JA</div><div><div class="dir-name">JesuJoba Adefila</div><div class="dir-email">jesujoba2006@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">KJ</div><div><div class="dir-name">Kaitlyn Jose</div><div class="dir-email">kaitlynrjose@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">MS</div><div><div class="dir-name">Matthew Stephen</div><div class="dir-email">matthewtstephen@yahoo.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">NA</div><div><div class="dir-name">Niranjana Arul</div><div class="dir-email">niranjana2024@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">OW</div><div><div class="dir-name">Osman Werner</div><div class="dir-email">owerner5249@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">PR</div><div><div class="dir-name">Preethi Ram</div><div class="dir-email">preethi.pr.net@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">RK</div><div><div class="dir-name">Rohit Kondameda</div><div class="dir-email">rohit.kondameda@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SS</div><div><div class="dir-name">Sahil Sethi</div><div class="dir-email">sahil777s2006@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SR</div><div><div class="dir-name">Sarrinah Rafique</div><div class="dir-email">sarrinah.rafique@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SS</div><div><div class="dir-name">Shubham Sanikere</div><div class="dir-email">shubhamsanikere.student@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SV</div><div><div class="dir-name">Srinidhi Valathappan</div><div class="dir-email">srinidhi.valath@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-            <div class="dir-card"><div class="dir-avatar">SM</div><div><div class="dir-name">Swaroop Malkhede</div><div class="dir-email">swaroop.malkhede@gmail.com</div><div class="dir-major-tag">Gamma</div></div></div>
-          </div>
-        </div>
-
-      </div>
-
-      <div id="tab-photos" class="portal-tab-content">
-        <h4 style="margin-top: 0; margin-bottom: 10px;">
-          <a href="https://drive.google.com/drive/folders/1SXuIsqk8LYlLmCPspnfKwzLvvCsegu9M" target="_blank" class="drive-heading-link">Big Little Photos <span style="font-size: 0.8em; color: #d4af37;">↗</span></a>
-        </h4>
-        <iframe 
-          src="https://drive.google.com/embeddedfolderview?id=1SXuIsqk8LYlLmCPspnfKwzLvvCsegu9M#grid" 
-          width="100%" 
-          height="400" 
-          frameborder="0"
-          style="border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
-        </iframe>
-
-        <h4 style="margin-top: 0; margin-bottom: 10px;">
-          <a href="https://drive.google.com/drive/folders/1MgrnxkqXL9UNCgzJBjrlDdnlQq5RgnRe" target="_blank" class="drive-heading-link">More Big Little Photos <span style="font-size: 0.8em; color: #d4af37;">↗</span></a>
-        </h4>
-        <iframe 
-          src="https://drive.google.com/embeddedfolderview?id=1MgrnxkqXL9UNCgzJBjrlDdnlQq5RgnRe#grid" 
-          width="100%" 
-          height="400" 
-          frameborder="0"
-          style="border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
-        </iframe>
-
-        <h4 style="margin-top: 0; margin-bottom: 15px;">Chapter Highlights (Google Photos)</h4>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
-          
-          <a href="https://photos.google.com/share/AF1QipNpKThVG-e1iGBhVZb7s_mB405rthq0Sw0kmEHQkcDRYjBAWGiYx9MgVy2BS5fgTA?key=TGVpcXk2Ym9xWUwwVFZlUHk5ZC1KSHBBUDJfQ0NR" target="_blank" class="photo-link-btn" style="display: block; background: #111; border: 1px solid #333; padding: 15px; border-radius: 8px; color: #fff; text-decoration: none; transition: 0.2s;">
-            <span style="font-size: 1.2rem; margin-right: 10px;">📸</span> PGN Pics Fall 25' <span style="float: right; color: #d4af37; font-weight: 500;">View Album →</span>
-          </a>
-          
-          <a href="https://photos.google.com/share/AF1QipMwEonTT6UrLH4WO75qeNZSK5DN3ApRmR38oFbXaRv6-wDujMZYQbluSXIGper5Jw?key=di1GY3RjbVhQXzd2NnhCU3BvWnRWSmFBQmhpWmtR" target="_blank" class="photo-link-btn" style="display: block; background: #111; border: 1px solid #333; padding: 15px; border-radius: 8px; color: #fff; text-decoration: none; transition: 0.2s;">
-            <span style="font-size: 1.2rem; margin-right: 10px;">📸</span> PGN Pics Spring 25' <span style="float: right; color: #d4af37; font-weight: 500;">View Album →</span>
-          </a>
-          
-          <a href="https://photos.google.com/share/AF1QipOkhHuKIdcHkzUFNOLx1VBrv_umekPtxD6kw9de-e0axTqW4lFtAQaLKMks_YNF1g?key=S1Z3RzZpTGNYSGxKMGVlbEQ4dDc4anJ5Q2x3RmVB" target="_blank" class="photo-link-btn" style="display: block; background: #111; border: 1px solid #333; padding: 15px; border-radius: 8px; color: #fff; text-decoration: none; transition: 0.2s;">
-            <span style="font-size: 1.2rem; margin-right: 10px;">📸</span> March Madness Photos <span style="float: right; color: #d4af37; font-weight: 500;">View Album →</span>
-          </a>
-
-        </div>
-
-        <p class="portal-note">* Photos are pulled directly from the chapter Google Drive and Google Photos.</p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 <script src="js/main.js"></script>
 <script type="module" src="js/rose-dark-glass.js"></script>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyB4MaSbpYbFVcnLjhGAg4T0y3UYMktwUUE",
-    authDomain: "pgn-utd-portal.firebaseapp.com",
-    projectId: "pgn-utd-portal",
-    storageBucket: "pgn-utd-portal.firebasestorage.app",
-    messagingSenderId: "770209804962",
-    appId: "1:770209804962:web:eaa0e54fc2e26c88589dfb",
-    measurementId: "G-3BT7LNXGEQ"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // --- SINGLE PASSWORD LOGIN ---
-  window.attemptLogin = async () => {
-    // .trim() removes invisible spaces from user's input
-    const passInput = document.getElementById('portal-pass').value.trim();
-    const err = document.getElementById('portal-error');
-
-    if (!passInput) return;
-
-    try {
-      const settingsDoc = await getDoc(doc(db, "settings", "portal"));
-      
-      // .trim() removes invisible spaces from the database just in case!
-      if (settingsDoc.exists() && settingsDoc.data().masterPassword.trim() === passInput) {
-        document.getElementById('portal-gate').style.display = 'none';
-        document.getElementById('portal-content').style.display = 'block';
-        err.classList.remove('show');
-      } else {
-        err.textContent = "Incorrect chapter password.";
-        err.classList.add('show');
-      }
-    } catch (error) {
-      err.textContent = "Error connecting to database. Make sure your Firestore is set up.";
-      err.classList.add('show');
-      console.error(error);
-    }
-  };
-
-  // --- LOGOUT ---
-  window.logout = () => {
-    document.getElementById('portal-gate').style.display = 'flex'; 
-    document.getElementById('portal-content').style.display = 'none';
-    document.getElementById('portal-pass').value = '';
-  };
-</script>
 
 </body>
 </html>

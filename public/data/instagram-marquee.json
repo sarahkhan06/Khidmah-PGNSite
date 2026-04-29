@@ -2,7 +2,23 @@
   "posts": [
     {
       "permalink": "https://www.instagram.com/p/DWkbM4bD0XW/",
-      "label": "Latest"
+      "label": "Latest",
+      "thumbnailUrl": "/images/ig/marquee-1.png"
+    },
+    {
+      "permalink": "https://www.instagram.com/p/DWXNpEGkSX_/",
+      "label": "Spotlight",
+      "thumbnailUrl": "/images/ig/marquee-2.png"
+    },
+    {
+      "permalink": "https://www.instagram.com/p/DVj-uAcET-e/?img_index=1",
+      "label": "Recap",
+      "thumbnailUrl": "/images/ig/marquee-3.png"
+    },
+    {
+      "permalink": "https://www.instagram.com/p/DWkbM4bD0XW/",
+      "label": "On Campus",
+      "thumbnailUrl": "/images/ig/marquee-4.png"
     }
   ]
 }

@@ -146,29 +146,19 @@ nav {
 .hero-rose {
   /* Scroll companion: fixed in viewport, moved by JS. */
   position: fixed;
-  top: 72px; /* below fixed nav */
-  right: 1.75rem;
+  top: 84px; /* below fixed nav */
+  right: 1.25rem;
+  left: auto;
   width: min(44vw, 680px);
-  height: min(760px, calc(100vh - 92px));
+  height: min(920px, calc(100vh - 72px));
   z-index: 3; /* above veil so the glass rose stays readable */
   pointer-events: none; /* wrapper doesn't block; canvas will opt-in */
   isolation: isolate;
   transform:
-    translate3d(0, var(--rose-follow-y, 0px), 0)
+    translate3d(var(--rose-x, 0px), calc(var(--rose-follow-y, 0px) + var(--rose-hero-drop, 0px)), 0)
     rotateZ(var(--rose-tilt, -6deg))
     scale(var(--rose-scale, 1));
-  transform-origin: 65% 30%;
-  transition: left 420ms cubic-bezier(.2,.9,.2,1), right 420ms cubic-bezier(.2,.9,.2,1);
-}
-
-.hero-rose[data-side="left"] {
-  left: 1.75rem;
-  right: auto;
-}
-
-.hero-rose[data-side="right"] {
-  right: 1.75rem;
-  left: auto;
+  transform-origin: 60% 26%;
 }
 
 .hero-rose__mount {
@@ -197,7 +187,7 @@ nav {
   background-color: var(--black-soft);
   background-image: url("../assets/images/hero-chapter-photo.png");
   background-size: cover;
-  background-position: 38% 42%;
+  background-position: 34% 42%;
   background-repeat: no-repeat;
   filter: saturate(1.12) contrast(1.1) brightness(1.04);
 }
@@ -414,7 +404,7 @@ section { padding: 5rem 2.5rem; }
   background: linear-gradient(90deg, rgba(184, 0, 0, 0.35) 0%, rgba(28, 27, 25, 0.08) 100%);
 }
 
-.inner { max-width: 1100px; margin: 0 auto; }
+.inner { max-width: 1200px; margin: 0 auto; }
 
 /* ============================================
    ABOUT
@@ -429,6 +419,8 @@ section { padding: 5rem 2.5rem; }
   align-items: start;
   margin-top: 3rem;
 }
+
+/* Keep About layout consistent even with rose slot padding. */
 
 .about-left p {
   color: var(--white-muted);
@@ -475,6 +467,181 @@ section { padding: 5rem 2.5rem; }
    ============================================ */
 
 #diversity { background: var(--black-mid); }
+
+/* ============================================
+   PILLARS / VALUES — decorative columns
+   ============================================ */
+
+#pillars-values {
+  position: relative;
+  overflow: hidden;
+}
+
+#pillars-values::before,
+#pillars-values::after {
+  content: "";
+  position: absolute;
+  top: 1.8rem;
+  bottom: 1.8rem;
+  width: clamp(66px, 6.5vw, 104px);
+  border-radius: 28px;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    /* capital + base */
+    radial-gradient(ellipse 115% 65% at 50% 7%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.0) 62%),
+    radial-gradient(ellipse 120% 70% at 50% 93%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.0) 62%),
+    /* fluting (vertical grooves) */
+    repeating-linear-gradient(
+      90deg,
+      rgba(28,27,25,0.035) 0px,
+      rgba(28,27,25,0.0) 6px,
+      rgba(255,255,255,0.18) 12px
+    ),
+    /* cylindrical shading */
+    linear-gradient(
+      90deg,
+      rgba(28,27,25,0.10) 0%,
+      rgba(255,255,255,0.55) 18%,
+      rgba(245,239,229,0.95) 48%,
+      rgba(28,27,25,0.07) 78%,
+      rgba(28,27,25,0.12) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(255, 251, 244, 0.98) 0%,
+      rgba(245, 239, 229, 0.94) 45%,
+      rgba(255, 251, 244, 0.99) 100%);
+  box-shadow:
+    0 34px 70px rgba(28, 27, 25, 0.12),
+    inset 0 0 0 1px rgba(28, 27, 25, 0.10),
+    inset 14px 0 22px rgba(28, 27, 25, 0.08),
+    inset -14px 0 24px rgba(255, 255, 255, 0.65);
+}
+
+#pillars-values::before {
+  left: clamp(10px, 1.2vw, 18px);
+  transform: rotate(-1.2deg);
+}
+
+#pillars-values::after {
+  right: clamp(10px, 1.2vw, 18px);
+  transform: rotate(1.2deg);
+}
+
+/* Keep section content above decorative pillars */
+#pillars-values .inner {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  #pillars-values::before,
+  #pillars-values::after {
+    display: none;
+  }
+}
+
+.pv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  align-items: start;
+}
+
+.pv-block {
+  background: var(--black);
+  border: 1px solid rgba(28, 27, 25, 0.08);
+  border-top: 3px solid var(--red);
+  border-radius: 14px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  box-shadow: 0 12px 32px rgba(28, 27, 25, 0.08);
+}
+
+.pv-heading {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.pv-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.pv-card {
+  background: var(--black-soft);
+  border: 1px solid rgba(28, 27, 25, 0.08);
+  border-radius: 12px;
+  padding: 1.1rem 1.1rem;
+}
+
+.pv-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.pv-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(184, 0, 0, 0.10);
+  border: 1px solid rgba(184, 0, 0, 0.18);
+  font-size: 1.1rem;
+}
+
+.pv-title {
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.pv-desc {
+  color: var(--white-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.pv-vision {
+  margin-top: 2.25rem;
+  padding: 1.6rem 1.8rem;
+  background: linear-gradient(135deg, rgba(184, 0, 0, 0.12) 0%, rgba(184, 134, 0, 0.10) 100%), var(--black-mid);
+  border: 1px solid rgba(184, 134, 0, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(28, 27, 25, 0.08);
+}
+
+.pv-vision-label {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+
+.pv-vision-text {
+  font-family: var(--font-condensed);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  line-height: 1.25;
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .pv-grid { grid-template-columns: 1fr; }
+}
 
 .majors-strip {
   margin-top: 3rem;
@@ -787,6 +954,28 @@ section { padding: 5rem 2.5rem; }
   border-top: 3px solid var(--gold);
   padding: 1rem 1.1rem;
   border-radius: 2px;
+}
+
+.exec-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 14px;
+  display: block;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 34px rgba(28, 27, 25, 0.22);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.exec-photo--spotlight {
+  width: min(280px, 100%);
+  aspect-ratio: 4 / 5;
+  margin: 0.4rem 0 0.9rem;
+  border-radius: 18px;
+  border-color: rgba(204, 0, 0, 0.35);
+  box-shadow: 0 18px 48px rgba(28, 27, 25, 0.28);
 }
 
 .exec-role {
@@ -1176,6 +1365,23 @@ section { padding: 5rem 2.5rem; }
 
 .portal-tab-content { display: none; }
 .portal-tab-content.active { display: block; }
+
+.drive-embed-wrap {
+  margin: 0 0 30px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 44px rgba(28, 27, 25, 0.22);
+}
+
+.drive-embed {
+  display: block;
+  width: 100%;
+  height: min(560px, 72vh);
+  border: 0;
+  background: transparent;
+}
 
 .member-directory {
   display: grid;
@@ -1659,7 +1865,7 @@ footer {
   /* Keep the rose visible on small screens (smaller + lower), instead of hiding it. */
   .hero-rose {
     width: min(78vw, 420px);
-    height: min(520px, calc(100vh - 120px));
+    height: min(640px, calc(100vh - 110px));
     right: 0.75rem;
     left: auto;
     top: 88px;

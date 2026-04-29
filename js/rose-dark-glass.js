@@ -4,6 +4,15 @@ function clamp(n, a, b) {
   return Math.max(a, Math.min(b, n));
 }
 
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function smoothstep(t) {
+  const x = clamp(t, 0, 1);
+  return x * x * (3 - 2 * x);
+}
+
 function initRoseDarkGlass(container) {
   const el = container;
   const firstRect = el.getBoundingClientRect?.() ?? { width: 0, height: 0 };
@@ -45,10 +54,10 @@ function initRoseDarkGlass(container) {
   // ── Scene / Camera ────────────────────────────────────────────────────────
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x0a0005, 0.055);
-  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
-  // Slightly higher camera + lower look target = more natural “head-on” bloom, less skyward
-  camera.position.set(0, 0.72, 4.0);
-  camera.lookAt(0, 0.12, 0);
+  const camera = new THREE.PerspectiveCamera(48, W / H, 0.1, 100);
+  // Keep the full bloom + stem in frame across sections.
+  camera.position.set(0, 1.05, 6.2);
+  camera.lookAt(0, -0.95, 0);
 
   // ── Env map bake ──────────────────────────────────────────────────────────
   const cubeRT = new THREE.WebGLCubeRenderTarget(256, {
@@ -220,8 +229,9 @@ function initRoseDarkGlass(container) {
     new THREE.Vector3(0.025, -1.55, 0.008),
     new THREE.Vector3(-0.02, -2.1, 0.012),
     new THREE.Vector3(0.018, -2.72, 0),
+    new THREE.Vector3(-0.012, -3.25, -0.01),
   ]);
-  rose.add(new THREE.Mesh(new THREE.TubeGeometry(stemCurve, 56, 0.022, 8, false), stemMat));
+  rose.add(new THREE.Mesh(new THREE.TubeGeometry(stemCurve, 72, 0.022, 8, false), stemMat));
 
   function addLeaf(x, y, z, ry, rz) {
     const s = new THREE.Shape();
@@ -264,14 +274,26 @@ function initRoseDarkGlass(container) {
   let hovered = false;
 
   // Smoothed camera (hover “peek” into top of bloom — same lerp feel as the rose)
-  let camY = 0.72,
-    lookY = 0.12;
+  let camY = 1.05,
+    lookY = -0.95;
   let roseYSink = 0;
   let scrollY = typeof window !== "undefined" ? window.scrollY || 0 : 0;
 
-  // Scroll “fall”: inertia-based downward drift as you scroll down.
-  let fallY = 0;
-  let fallV = 0;
+  // Scroll companion motion state.
+  let followY = 0;
+  let wrapX = 0;
+  let tiltDeg = -8;
+  let activeSectionIdx = 0;
+
+  // Subtle scene "fall" so it always feels weighty.
+  let fallOffset = 0;
+  let fallVel = 0;
+
+  // Pull-down interaction (smooth, no overshoot).
+  let pullY = 0;
+  let pullTarget = 0;
+
+  let lastScrollForDrift = typeof window !== "undefined" ? window.scrollY || 0 : 0;
   const heroSection =
     typeof document !== "undefined" ? document.getElementById("hero") : null;
 
@@ -280,6 +302,7 @@ function initRoseDarkGlass(container) {
       ? [
           document.getElementById("hero"),
           document.getElementById("about"),
+          document.getElementById("pillars-values"),
           document.getElementById("diversity"),
           document.getElementById("lineage"),
           document.getElementById("events"),
@@ -294,9 +317,19 @@ function initRoseDarkGlass(container) {
     return "right";
   };
 
-  let followY = 0;
-  let followV = 0;
-  let followIdx = 0;
+  const docTop = (node) => {
+    if (!node?.getBoundingClientRect) return 0;
+    const r = node.getBoundingClientRect();
+    return (window.scrollY || 0) + r.top;
+  };
+
+  let sectionTops = [];
+  const updateSectionTops = () => {
+    sectionTops = followSections.map((s) => docTop(s));
+  };
+  if (typeof window !== "undefined") {
+    updateSectionTops();
+  }
 
   const down = (e) => {
     drag = true;
@@ -340,6 +373,7 @@ function initRoseDarkGlass(container) {
   renderer.domElement.addEventListener("pointerleave", () => {
     hovered = false;
   });
+
   const onScroll = () => {
     scrollY = window.scrollY || 0;
   };
@@ -366,8 +400,8 @@ function initRoseDarkGlass(container) {
       envBaked = true;
     }
 
-    // Slow constant spin on its vertical axis (independent of scroll follow).
-    if (!drag) rotY += 0.0026;
+    // Slow constant spin on its vertical axis.
+    if (!drag) rotY += hovered ? 0.0048 : 0.0036;
 
     const kRoseLerp = drag ? 0.065 : 0.092;
     const kCamLerp = drag ? 0.055 : 0.078;
@@ -413,21 +447,19 @@ function initRoseDarkGlass(container) {
         0.48
       );
 
-      const targetCamY = 0.72 - my * 0.12 + (overRose && inRoseZone ? -localNY * 0.08 : 0);
-      const targetLookY = 0.12 + my * 0.04 + (overRose && inRoseZone ? -localNY * 0.04 : 0);
+      const targetCamY = 1.05 - my * 0.12 + (overRose && inRoseZone ? -localNY * 0.08 : 0);
+      const targetLookY = -0.95 + my * 0.04 + (overRose && inRoseZone ? -localNY * 0.04 : 0);
       camY += (targetCamY - camY) * kCamLerp;
       lookY += (targetLookY - lookY) * kCamLerp;
     } else {
       targetRotY = rotY;
       targetRotX = rotX;
-      const targetCamY = 0.72;
-      const targetLookY = 0.12;
+      const targetCamY = 1.05;
+      const targetLookY = -0.95;
       camY += (targetCamY - camY) * kCamLerp;
       lookY += (targetLookY - lookY) * kCamLerp;
     }
 
-    // True hover state (pointer actually over the rose canvas).
-    // On hover we only slide the rose downward a touch, so you see more of the top.
     const hoverActive = !drag && hovered;
 
     camera.position.y = camY;
@@ -436,69 +468,145 @@ function initRoseDarkGlass(container) {
     rose.rotation.y += (targetRotY - rose.rotation.y) * kRoseLerp;
     rose.rotation.x += (targetRotX - rose.rotation.x) * kRoseLerp;
 
-    // Side (zig-zag): pick the active section by viewport center.
     const vh = window.innerHeight || 800;
     const vw = window.innerWidth || 1200;
-    if (!reduceMotion && followSections.length && roseWrap && vw > 980) {
-      const centerY = vh * 0.42;
-      let bestI = 0;
-      let bestD = Infinity;
-      for (let i = 0; i < followSections.length; i++) {
-        const r = followSections[i].getBoundingClientRect();
-        const d = Math.abs(r.top + r.height * 0.28 - centerY);
-        if (d < bestD) {
-          bestD = d;
-          bestI = i;
+
+    if (!reduceMotion && roseWrap && followSections.length && vw > 980) {
+      const y = window.scrollY || 0;
+      const doc = document.documentElement;
+
+      // Determine current section from precomputed tops (stable order; no sorting).
+      const n = followSections.length;
+      let idx = 0;
+      if (n >= 2) {
+        for (let i = 0; i < n - 1; i++) {
+          const a = sectionTops[i] ?? docTop(followSections[i]);
+          const b = sectionTops[i + 1] ?? docTop(followSections[i + 1]);
+          if (y >= a && y < b) {
+            idx = i;
+            break;
+          }
+          if (y >= b) idx = i + 1;
         }
       }
-      followIdx = bestI;
+      activeSectionIdx = idx;
+      const cur = followSections[Math.min(n - 1, idx)];
+      const next = followSections[Math.min(n - 1, idx + 1)];
 
-      const active = followSections[followIdx];
-      const side = sectionSide(active);
+      const contentEl = cur?.querySelector?.(".inner") || cur;
+      const curRect = contentEl?.getBoundingClientRect?.() ?? { top: 0, height: vh };
+      const wrapRect0 = roseWrap.getBoundingClientRect();
+      const wrapH = roseWrap.offsetHeight || wrapRect0.height || 600;
+      const baseTopPx = 84; // keep in sync with `.hero-rose { top: 84px; }`
 
-      roseWrap.style.setProperty("--rose-tilt", side === "left" ? "7deg" : "-7deg");
-      roseWrap.dataset.side = side;
+      const anchorFor = (id) => {
+        switch (id) {
+          case "hero":
+            return 0.32;
+          case "about":
+            return 0.34;
+          case "pillars-values":
+            return 0.30;
+          case "diversity":
+            return 0.32;
+          case "lineage":
+            return 0.30;
+          case "events":
+            return 0.34;
+          case "portal":
+            return 0.52;
+          default:
+            return 0.34;
+        }
+      };
+
+      const desiredViewportY = curRect.top + curRect.height * anchorFor(cur?.id);
+      const targetFollowY = clamp(desiredViewportY - baseTopPx - wrapH * 0.42 + 24, -220, 320);
+      followY += (targetFollowY - followY) * 0.075;
+      roseWrap.style.setProperty("--rose-follow-y", `${followY.toFixed(2)}px`);
+
+      const heroH = heroSection?.getBoundingClientRect?.().height || vh;
+      const heroProg = clamp((y || 0) / Math.max(1, heroH * 0.9), 0, 1);
+      let scale = 1.12 - heroProg * 0.18;
+      const heroDropPx = (1 - heroProg) * 300;
+
+      // Section checkpoint blending.
+      const curTop = sectionTops[idx] ?? docTop(cur);
+      const nextTop = sectionTops[Math.min(n - 1, idx + 1)] ?? docTop(next);
+      const span = Math.max(240, nextTop - curTop);
+      const within = clamp((y - curTop) / span, 0, 1);
+      const blend = smoothstep(within);
+
+      const scaleBoost =
+        cur?.id === "pillars-values"
+          ? lerp(1, 1.22, blend)
+          : next?.id === "pillars-values"
+            ? lerp(1, 1.22, blend)
+            : 1;
+      scale *= scaleBoost;
+
+      roseWrap.style.setProperty("--rose-scale", `${scale.toFixed(3)}`);
+      roseWrap.style.setProperty("--rose-hero-drop", `${heroDropPx.toFixed(1)}px`);
+
+      // Side-to-side motion with non-overshooting smoothing (no jiggle).
+      const curSide = sectionSide(cur);
+      const nextSide = sectionSide(next);
+      const marginPx = 28;
+      const leftShiftPx = -(vw - wrapRect0.width - marginPx * 2);
+      const sideToWrapPx = (side) => (side === "left" ? leftShiftPx : 0);
+      const targetWrapX = lerp(sideToWrapPx(curSide), sideToWrapPx(nextSide), blend);
+
+      const scrollDelta = clamp((y - lastScrollForDrift) / 240, -1, 1);
+      lastScrollForDrift = y;
+      const alphaBase = clamp(0.055 + Math.abs(scrollDelta) * 0.075, 0.05, 0.14);
+      const alpha =
+        cur?.id === "pillars-values" || next?.id === "pillars-values" ? alphaBase * 0.62 : alphaBase;
+      wrapX += (targetWrapX - wrapX) * alpha;
+      wrapX = clamp(wrapX, leftShiftPx, 0);
+      roseWrap.style.setProperty("--rose-x", `${wrapX.toFixed(2)}px`);
+
+      const norm = leftShiftPx ? clamp(wrapX / leftShiftPx, 0, 1) : 0;
+      const sideCounterLean = norm > 0.5 ? 3.0 : -3.0;
+      const depthTilt = clamp((idx / Math.max(1, n - 1)) * 6, 0, 6);
+      const targetTilt = clamp(
+        -12 + (norm - 0.5) * 22 + (idx % 2 === 0 ? -2 : 2) + sideCounterLean + depthTilt,
+        -24,
+        24
+      );
+      tiltDeg += (targetTilt - tiltDeg) * 0.07;
+      roseWrap.style.setProperty("--rose-tilt", `${tiltDeg.toFixed(2)}deg`);
     } else if (roseWrap) {
       roseWrap.style.setProperty("--rose-scale", "1");
-      roseWrap.style.setProperty("--rose-tilt", "-6deg");
-      roseWrap.dataset.side = "right";
+      roseWrap.style.setProperty("--rose-tilt", "-8deg");
+      roseWrap.style.setProperty("--rose-hero-drop", "0px");
+      roseWrap.style.setProperty("--rose-x", "0px");
+      wrapX = 0;
     }
 
-    // Continuous free-fall follow: map overall scroll progress -> vertical offset.
-    if (!reduceMotion && roseWrap) {
+    // Subtle "fall" in scene-space (kept small so stem stays visible).
+    if (!reduceMotion) {
       const doc = document.documentElement;
       const scrollMax = Math.max(1, (doc?.scrollHeight || 1) - vh);
       const prog = clamp((window.scrollY || 0) / scrollMax, 0, 1);
-
-      const maxY = Math.max(0, vh - 220);
-      const baseY = Math.max(40, 0.06 * vh);
-      const eased = 1 - Math.pow(1 - prog, 2.2); // ease-in curve
-      const targetY = clamp(baseY + eased * (maxY - baseY), 10, maxY);
-
-      // Spring follow for a smooth, constant "falling" motion.
-      const k = 0.06; // stiffness
-      const damp = 0.78; // damping
-      followV += (targetY - followY) * k;
-      followV *= damp;
-      followV += 0.18; // gravity bias — always pulls slightly downward
-      followY += followV;
-
-      // Big on hero, smaller once you scroll past the hero.
-      const heroH = heroSection?.getBoundingClientRect?.().height || vh;
-      const heroProg = clamp((window.scrollY || 0) / Math.max(1, heroH * 0.9), 0, 1);
-      const scale = 1 - heroProg * 0.28; // 1.00 -> 0.72
-
-      roseWrap.style.setProperty("--rose-follow-y", `${followY.toFixed(2)}px`);
-      roseWrap.style.setProperty("--rose-scale", `${scale.toFixed(3)}`);
+      const eased = 1 - Math.pow(1 - prog, 2.2);
+      const targetFall = eased * 0.22;
+      fallVel += (targetFall - fallOffset) * (0.06 * 0.22);
+      fallVel *= 0.78;
+      fallVel += 0.0018;
+      fallOffset += fallVel;
     }
 
-    rose.rotation.z = Math.sin(t * 0.33) * 0.012;
+    // Pull-down / hover interaction: smooth only, no bounce.
+    pullTarget = hoverActive ? 0.08 : 0;
+    pullY += (pullTarget - pullY) * 0.22;
 
-    // Hover: sink rose slightly (down) instead of drifting upward vs idle bob
-    const targetRoseYSink = hoverActive ? 0.18 : !drag && overRose && inRoseZone ? 0.05 : 0;
-    roseYSink += (targetRoseYSink - roseYSink) * 0.12;
-    rose.position.y = Math.sin(t * 0.5) * 0.03 - roseYSink;
-    under.intensity = 1.0 + Math.sin(t * 0.9) * 0.35;
+    roseYSink += (0 - roseYSink) * 0.12;
+    rose.position.x = 0;
+    rose.position.y = -0.02 - roseYSink - fallOffset - pullY;
+
+    // No bob/roll light wobble.
+    rose.rotation.z = 0;
+    under.intensity = 1.0;
 
     renderer.render(scene, camera);
   }
@@ -513,6 +621,7 @@ function initRoseDarkGlass(container) {
     camera.aspect = rw / rh;
     camera.updateProjectionMatrix();
     renderer.setSize(rw, rh);
+    updateSectionTops();
   };
   window.addEventListener("resize", onResize);
   // Run once after styles/layout settle.

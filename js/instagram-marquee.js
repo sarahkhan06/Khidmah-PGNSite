@@ -35,6 +35,19 @@ function cssUrl(u) {
   return encodeURI(u).replace(/'/g, "%27");
 }
 
+function shortcodeFromPermalink(permalink) {
+  const m = String(permalink || "").match(/instagram\.com\/p\/([^/?#]+)/i);
+  return m?.[1] || "";
+}
+
+function fallbackThumbnail(permalink) {
+  const sc = shortcodeFromPermalink(permalink);
+  if (!sc) return "";
+  // Best-effort public endpoint. Often works without auth, but Instagram may block it.
+  // If blocked, we keep the gradient cover.
+  return `https://www.instagram.com/p/${sc}/media/?size=l`;
+}
+
 function chipText(p, i, len) {
   const label = (p.label || "").trim();
   if (label) return label;
@@ -109,7 +122,7 @@ async function enrichPosts(posts) {
     const hasLabel = !!(p.label || "").trim();
     return {
       ...p,
-      thumbnailUrl: p.thumbnailUrl || o?.thumbnail_url || "",
+      thumbnailUrl: p.thumbnailUrl || o?.thumbnail_url || fallbackThumbnail(p.permalink) || "",
       resolvedTitle: !hasLabel && o?.title ? o.title : "",
     };
   });
