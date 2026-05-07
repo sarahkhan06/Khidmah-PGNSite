@@ -259,7 +259,14 @@
         err.classList.add('show');
       }
     } catch (error) {
-      err.textContent = "Error connecting to database. Make sure your Firestore is set up.";
+      const code = error?.code ? String(error.code) : "";
+      const msg = error?.message ? String(error.message) : String(error);
+      if (code.includes("permission-denied")) {
+        err.textContent =
+          "Portal database blocked (permission denied). Update Firestore rules to allow read on settings/portal.";
+      } else {
+        err.textContent = `Database error${code ? ` (${code})` : ""}: ${msg}`;
+      }
       err.classList.add('show');
       console.error(error);
     }
