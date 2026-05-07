@@ -573,7 +573,13 @@ function initRoseDarkGlass(container) {
         -24,
         24
       );
+      // Hero-specific: your background rose stem is closer to vertical,
+      // so reduce the max tilt on the hero for perfect alignment.
+      if (cur?.id === "hero") {
+        tiltDeg += (targetTilt * 0.65 - tiltDeg) * 0.07;
+      } else {
       tiltDeg += (targetTilt - tiltDeg) * 0.07;
+      }
       roseWrap.style.setProperty("--rose-tilt", `${tiltDeg.toFixed(2)}deg`);
     } else if (roseWrap) {
       roseWrap.style.setProperty("--rose-scale", "1");
