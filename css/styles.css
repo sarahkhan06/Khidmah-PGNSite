@@ -969,6 +969,12 @@ section { padding: 5rem 2.5rem; }
   background: rgba(255, 255, 255, 0.02);
 }
 
+.exec-photo--circle {
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  object-position: center 20%;
+}
+
 .exec-photo--spotlight {
   width: min(280px, 100%);
   aspect-ratio: 4 / 5;
@@ -976,6 +982,13 @@ section { padding: 5rem 2.5rem; }
   border-radius: 18px;
   border-color: rgba(204, 0, 0, 0.35);
   box-shadow: 0 18px 48px rgba(28, 27, 25, 0.28);
+}
+
+.exec-photo--spotlight.exec-photo--circle {
+  width: min(240px, 100%);
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  object-position: center 38%;
 }
 
 .exec-role {
@@ -999,6 +1012,13 @@ section { padding: 5rem 2.5rem; }
   font-size: 0.78rem;
   color: var(--white-muted);
   margin-top: 0.25rem;
+}
+
+.exec-bio {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--white-muted);
 }
 
 #exec-board-page {
