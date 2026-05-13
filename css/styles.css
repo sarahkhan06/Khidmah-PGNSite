@@ -765,9 +765,9 @@ section { padding: 5rem 2.5rem; }
 }
 
 .current-season {
-  background: rgba(204,0,0,0.15);
-  border-color: rgba(204,0,0,0.4);
-  color: var(--red);
+  background: rgba(255,184,0,0.1);
+  border-color: rgba(255,184,0,0.25);
+  color: var(--gold);
 }
 
 .class-toggle {
@@ -1050,7 +1050,78 @@ section { padding: 5rem 2.5rem; }
 }
 
 .exec-spotlight-inner {
-  max-width: 560px;
+  max-width: 100%;
+}
+
+.exec-spotlight-grid {
+  display: grid;
+  grid-template-columns: minmax(18rem, 26rem) 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.exec-spotlight-media {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.exec-spotlight-personal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.exec-spotlight-role {
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.exec-photo--spotlight {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 1rem;
+}
+
+.exec-spotlight-major {
+  font-family: var(--font-condensed);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.exec-spotlight-bio {
+  font-size: 1.6rem;
+  line-height: 1.9;
+}
+
+.exec-spotlight-major span {
+  color: var(--white);
+}
+
+.exec-spotlight-bio-column {
+  max-width: 48rem;
+}
+
+@media (max-width: 740px) {
+  .exec-spotlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exec-spotlight-summary {
+    display: block;
+  }
+
+  .exec-photo--spotlight {
+    width: 100%;
+  }
 }
 
 .exec-spotlight-label {
